@@ -15,12 +15,12 @@ namespace DemoQa.Com_Tests.Tests
     public class RegistrationTests
     {
         private readonly ITestOutputHelper _output;
-        private readonly E2ETestFixture _tests;
+        private readonly E2ETestFixture _fixture;
         
-        public RegistrationTests(E2ETestFixture tests, ITestOutputHelper output)
+        public RegistrationTests(E2ETestFixture fixture, ITestOutputHelper output)
         {
             _output = output;
-            _tests = tests;
+            _fixture = fixture;
         }
 
         [Scenario]
@@ -33,7 +33,7 @@ namespace DemoQa.Com_Tests.Tests
         public void StudentCanRegisterAndSubmit(string forename, string surname, string email, string gender,
             string phoneNumber, string dob, string hobby, string address, string profile)
         {
-            _tests.DemoQaPages.PageStudentRegistrationForm().NavigateTo();
+            _fixture.DemoQaPages.PageStudentRegistrationForm().NavigateTo();
             
             // deliberately writing gherkin here which isn't tied to a UI (anti-patten)
             // the tests steps would then be hard coded to the UI which could change
@@ -51,7 +51,7 @@ namespace DemoQa.Com_Tests.Tests
             "When the student registers providing all mandatory data"
                 .x(() =>
                 {
-                    _tests.DemoQaPages.PageStudentRegistrationForm()
+                    _fixture.DemoQaPages.PageStudentRegistrationForm()
                         .SendStudentName(forename, surname)
                         .SendEmail(email)
                         .SelectGender(gender)
@@ -61,14 +61,14 @@ namespace DemoQa.Com_Tests.Tests
                         .SendDateOfBirth(dob)
                         .SelectHobby(hobby)
                         .SendCurrentAddress(address)
-                        .UploadPicture(_tests.TestFileLocation(profile))
+                        .UploadPicture(_fixture.TestFileLocation(profile))
                         .Submit();
                 });
 
             "Then the student is able to register"
                 .x(() =>
                 {
-                    Assert.True(_tests
+                    Assert.True(_fixture
                         .DemoQaPages.PageStudentRegistrationForm().RegistrationCompleteModalOpen());
                 });
         }
@@ -76,18 +76,18 @@ namespace DemoQa.Com_Tests.Tests
         [Scenario]
         public void StudentAttemptsToRegisterWithMissingMandatoryFields()
         {
-            _tests.DemoQaPages.PageStudentRegistrationForm().NavigateTo();
+            _fixture.DemoQaPages.PageStudentRegistrationForm().NavigateTo();
 
             "Given a student has no existing account"
                 .x(() => { });
 
             "When the student attempts to register with missing mandatory information"
-                .x(() => { _tests.DemoQaPages.PageStudentRegistrationForm().Submit(); });
+                .x(() => { _fixture.DemoQaPages.PageStudentRegistrationForm().Submit(); });
 
             "Then the student is unable to register"
                 .x(() =>
                 {
-                    Assert.False(_tests.DemoQaPages
+                    Assert.False(_fixture.DemoQaPages
                         .PageStudentRegistrationForm().RegistrationCompleteModalOpen());
                 });
         }
