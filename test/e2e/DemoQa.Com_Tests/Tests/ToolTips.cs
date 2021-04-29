@@ -2,6 +2,10 @@
 
 namespace DemoQa.Com_Tests.Tests
 {
+    /// <summary>
+    /// Must hover over the ‘Hover me to see’ button
+    /// Must hover over the ‘Hover me to see’ field
+    /// </summary>
     public class ToolTips : E2ETestFixture
     {
         [Scenario]
