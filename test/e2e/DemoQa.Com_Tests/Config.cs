@@ -9,7 +9,7 @@ namespace DemoQa.Com_Tests
         public Config()
         {
             TestConfiguration = new ConfigurationBuilder()
-                .AddJsonFile(System.IO.Directory.GetCurrentDirectory() + "\\appsettings.json")
+                .AddJsonFile(System.IO.Directory.GetCurrentDirectory() + "//appsettings.json")
                 .Build();
         }
     }

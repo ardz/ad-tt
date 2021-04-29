@@ -25,7 +25,7 @@ namespace DemoQa.Com_Tests
 
         public static string TestFileLocation(string fileName)
         {
-            return System.IO.Directory.GetCurrentDirectory() + $"\\TestFiles\\{fileName}";
+            return System.IO.Directory.GetCurrentDirectory() + $"//TestFiles//{fileName}";
         }
 
         public void Dispose()

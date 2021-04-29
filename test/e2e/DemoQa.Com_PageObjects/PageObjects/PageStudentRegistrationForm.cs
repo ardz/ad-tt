@@ -43,11 +43,9 @@ namespace DemoQa.Com_PageObjects.PageObjects
 
         public PageStudentRegistrationForm SelectGender(string gender)
         {
-            // really? :/
-            
             ExecuteJavaScriptClick(Driver
                 .FindElement(By
-                    // tell the developer they've spelled gender wrong
+                    // spelling of gender wrong
                     .XPath($"//div[@id='genterWrapper']//*[contains(text(),'{gender}')]/..//input")));
 
             return this;
@@ -64,10 +62,11 @@ namespace DemoQa.Com_PageObjects.PageObjects
         {
             // this control has a deliberate bug in it you can't clear it properly
             // and the delete key causes the whole page back to go back
-
-            Dob.Clear();
+            // Dob.Clear();
+            // Dob.SendKeys(dob);
             
-            Dob.SendKeys(dob);
+            var jse = (IJavaScriptExecutor) Driver;
+            jse.ExecuteScript($"document.getElementById('dateOfBirthInput').value='{dob}'");
 
             return this;
         }
