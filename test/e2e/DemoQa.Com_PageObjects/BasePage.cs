@@ -1,5 +1,6 @@
 ﻿using Core;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Internal;
 
 namespace DemoQa.Com_PageObjects
 {
@@ -24,7 +25,7 @@ namespace DemoQa.Com_PageObjects
             Driver.Navigate().GoToUrl(DriverManager.SutUrl + PageUrl);
         }
 
-        protected void ExecuteJavaScript(IWebElement element)
+        protected void ExecuteJavaScriptClick(IWebElement element)
         {
             var jse = (IJavaScriptExecutor) Driver;
             jse.ExecuteScript("arguments[0].click();", element);

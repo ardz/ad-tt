@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using Xbehave;
-using Xunit;
+﻿using Xbehave;
 
 namespace DemoQa.Com_Tests.Tests
 {
@@ -9,16 +7,12 @@ namespace DemoQa.Com_Tests.Tests
         [Scenario]
         public void SelectAndCloseSmallModal()
         {
-            DemoQaPages.PageDroppable().NavigateTo();
+            DemoQaPages.PageModalDialogs().NavigateTo();
 
             // is this meant to be testing anything?
 
-            "Perform drag and drop"
-                .x(() =>
-                {
-                    DemoQaPages.PageDroppable().DragAndDrop();
-                    Assert.True(DemoQaPages.PageDroppable().DropSuccessful());
-                });
+            "Select and close small modal"
+                .x(() => { DemoQaPages.PageModalDialogs().OpenAndCloseModal(); });
         }
     }
 }

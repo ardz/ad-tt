@@ -45,7 +45,7 @@ namespace DemoQa.Com_PageObjects.PageObjects
         {
             // really? :/
             
-            ExecuteJavaScript(Driver
+            ExecuteJavaScriptClick(Driver
                 .FindElement(By
                     // tell the developer they've spelled gender wrong
                     .XPath($"//div[@id='genterWrapper']//*[contains(text(),'{gender}')]/..//input")));
@@ -74,7 +74,7 @@ namespace DemoQa.Com_PageObjects.PageObjects
 
         public PageStudentRegistrationForm SelectHobby(string hobby)
         {
-            ExecuteJavaScript(Driver
+            ExecuteJavaScriptClick(Driver
                 .FindElement(By
                     .XPath($"//div[@id='hobbiesWrapper']//*[contains(text(),'{hobby}')]/..//input")));
 

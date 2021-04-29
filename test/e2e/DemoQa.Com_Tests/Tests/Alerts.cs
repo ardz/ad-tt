@@ -1,5 +1,4 @@
 ﻿using Xbehave;
-using Xunit;
 
 namespace DemoQa.Com_Tests.Tests
 {

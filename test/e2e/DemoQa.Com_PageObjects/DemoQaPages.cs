@@ -32,5 +32,15 @@ namespace DemoQa.Com_PageObjects
         {
             return new(DriverManager);
         }
+
+        public PageModalDialogs PageModalDialogs()
+        {
+            return new(DriverManager);
+        }
+
+        public PageDatePicker PageDatePicker()
+        {
+            return new PageDatePicker(DriverManager);
+        }
     }
 }
