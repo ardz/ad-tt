@@ -15,12 +15,12 @@ namespace DemoQa.Com_Tests.Tests
     public class RegistrationTests
     {
         private readonly ITestOutputHelper _output;
-        private readonly E2ETestFixture _fixture;
+        private readonly E2ETestFixture _tests;
         
-        public RegistrationTests(E2ETestFixture fixture, ITestOutputHelper output)
+        public RegistrationTests(E2ETestFixture tests, ITestOutputHelper output)
         {
             _output = output;
-            _fixture = fixture;
+            _tests = tests;
         }
 
         [Scenario]
@@ -33,7 +33,7 @@ namespace DemoQa.Com_Tests.Tests
         public void StudentCanRegisterAndSubmit(string forename, string surname, string email, string gender,
             string phoneNumber, string dob, string hobby, string address, string profile)
         {
-            _fixture.DemoQaPages.PageStudentRegistrationForm().NavigateTo();
+            _tests.DemoQaPages.PageStudentRegistrationForm().NavigateTo();
 
             // could be an example of a given here but there's not really any initial
             // system context you can specify here so it doesn't really work
@@ -43,7 +43,7 @@ namespace DemoQa.Com_Tests.Tests
             "When the student registers completing all mandatory fields"
                 .x(() =>
                 {
-                    _fixture.DemoQaPages.PageStudentRegistrationForm()
+                    _tests.DemoQaPages.PageStudentRegistrationForm()
                         .SendStudentName(forename, surname)
                         .SendEmail(email)
                         .SelectGender(gender)
@@ -53,14 +53,14 @@ namespace DemoQa.Com_Tests.Tests
                         .SendDateOfBirth(dob)
                         .SelectHobby(hobby)
                         .SendCurrentAddress(address)
-                        .UploadPicture(_fixture.TestFileLocation(profile))
+                        .UploadPicture(_tests.TestFileLocation(profile))
                         .Submit();
                 });
 
             "Then the student is able to register"
                 .x(() =>
                 {
-                    Assert.True(_fixture
+                    Assert.True(_tests
                         .DemoQaPages.PageStudentRegistrationForm().RegistrationCompleteModalOpen());
                 });
         }
@@ -68,18 +68,18 @@ namespace DemoQa.Com_Tests.Tests
         [Scenario]
         public void StudentAttemptsToRegisterWithMissingMandatoryFields()
         {
-            _fixture.DemoQaPages.PageStudentRegistrationForm().NavigateTo();
+            _tests.DemoQaPages.PageStudentRegistrationForm().NavigateTo();
 
             "Given a student has no existing account"
                 .x(() => { });
 
             "When the student attempts to register with missing mandatory information"
-                .x(() => { _fixture.DemoQaPages.PageStudentRegistrationForm().Submit(); });
+                .x(() => { _tests.DemoQaPages.PageStudentRegistrationForm().Submit(); });
 
             "Then the student is unable to register"
                 .x(() =>
                 {
-                    Assert.False(_fixture.DemoQaPages
+                    Assert.False(_tests.DemoQaPages
                         .PageStudentRegistrationForm().RegistrationCompleteModalOpen());
                 });
         }

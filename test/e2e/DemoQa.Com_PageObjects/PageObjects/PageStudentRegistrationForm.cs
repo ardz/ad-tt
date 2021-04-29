@@ -1,6 +1,5 @@
 ﻿using Core;
 using OpenQA.Selenium;
-using Xunit;
 
 namespace DemoQa.Com_PageObjects.PageObjects
 {
@@ -63,7 +62,7 @@ namespace DemoQa.Com_PageObjects.PageObjects
 
         public PageStudentRegistrationForm SendDateOfBirth(string dob)
         {
-            // this control has a deliberate bug in it you can't clear it
+            // this control has a deliberate bug in it you can't clear it properly
             // and the delete key causes the whole page back to go back
 
             Dob.Clear();
@@ -109,7 +108,9 @@ namespace DemoQa.Com_PageObjects.PageObjects
         {
             // instead of checking the mandatory fields are set to invalid in the 
             // css (above), just check the modal appeared or didn't appear - pros and cons
-            // they both kind of suck tbh :/
+            // they both kind of suck tbh :/ you can take this as far as you want and 
+            // check the fields that have been entered on the modal but there's little point
+            // if the modal only appears if all fields are completed that's enough
 
             try
             {

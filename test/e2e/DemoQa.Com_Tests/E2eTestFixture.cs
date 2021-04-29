@@ -1,17 +1,12 @@
 ﻿using System;
 using Core;
 using DemoQa.Com_PageObjects;
-using OpenQA.Selenium;
-using Xunit;
 
 namespace DemoQa.Com_Tests
 {
-
-    
     public class E2ETestFixture : IDisposable
     {
         private DriverManager DriverManager { get; }
-        private readonly IWebDriver _driver;
         public DemoQaPages DemoQaPages { get; }
 
         public E2ETestFixture()
@@ -23,7 +18,7 @@ namespace DemoQa.Com_Tests
                     testConfig["e2e:suturl"], 
                     int.Parse(testConfig["e2e:timeout"]));
 
-            _driver = DriverManager.CreateDriver();
+            DriverManager.CreateDriver();
 
             DemoQaPages = new DemoQaPages(DriverManager);
         }
@@ -35,7 +30,7 @@ namespace DemoQa.Com_Tests
 
         public void Dispose()
         {
-            DriverManager.Driver.Close();
+            DriverManager.Driver.Quit();
         }
     }
 }

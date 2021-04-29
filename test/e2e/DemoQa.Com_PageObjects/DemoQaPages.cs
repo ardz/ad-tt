@@ -17,5 +17,10 @@ namespace DemoQa.Com_PageObjects
         {
             return new PageStudentRegistrationForm(DriverManager);
         }
+
+        public PageAlerts PageAlerts()
+        {
+            return new PageAlerts(DriverManager);
+        }
     }
 }

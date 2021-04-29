@@ -5,7 +5,7 @@ namespace DemoQa.Com_Tests
     public class Config
     {
         public IConfiguration TestConfiguration { get; }
-        
+
         public Config()
         {
             TestConfiguration = new ConfigurationBuilder()

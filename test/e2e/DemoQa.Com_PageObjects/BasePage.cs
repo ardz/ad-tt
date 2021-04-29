@@ -15,8 +15,8 @@ namespace DemoQa.Com_PageObjects
 
         protected BasePage(DriverManager driverManager)
         {
-            Driver = driverManager.Driver;
             DriverManager = driverManager;
+            Driver = driverManager.Driver;
         }
 
         public void NavigateTo()
@@ -28,11 +28,6 @@ namespace DemoQa.Com_PageObjects
         {
             var jse = (IJavaScriptExecutor) Driver;
             jse.ExecuteScript("arguments[0].click();", element);
-        }
-
-        public bool IsPageLoaded()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
