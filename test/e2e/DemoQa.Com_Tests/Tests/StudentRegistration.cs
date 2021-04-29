@@ -44,7 +44,7 @@ namespace DemoQa.Com_Tests.Tests
             // https://www.ministryoftesting.com/dojo/lessons/introduction-to-subcutaneous-testing
 
             // could be an example of a given here but there's not really any initial
-            // system context here so there' test code to call
+            // system context here so there's no test code to call
             "Given a student has no existing account"
                 .x(() => { });
 
