@@ -23,7 +23,7 @@ namespace DemoQa.Com_Tests
             DemoQaPages = new DemoQaPages(DriverManager);
         }
 
-        public string TestFileLocation(string fileName)
+        public static string TestFileLocation(string fileName)
         {
             return System.IO.Directory.GetCurrentDirectory() + $"\\TestFiles\\{fileName}";
         }

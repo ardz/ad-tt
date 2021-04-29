@@ -61,7 +61,7 @@ namespace DemoQa.Com_Tests.Tests
                         .SendDateOfBirth(dob)
                         .SelectHobby(hobby)
                         .SendCurrentAddress(address)
-                        .UploadPicture(_fixture.TestFileLocation(profile))
+                        .UploadPicture(E2ETestFixture.TestFileLocation(profile))
                         .Submit();
                 });
 

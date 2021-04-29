@@ -15,12 +15,22 @@ namespace DemoQa.Com_PageObjects
 
         public PageStudentRegistrationForm PageStudentRegistrationForm()
         {
-            return new PageStudentRegistrationForm(DriverManager);
+            return new(DriverManager);
         }
 
         public PageAlerts PageAlerts()
         {
-            return new PageAlerts(DriverManager);
+            return new(DriverManager);
+        }
+
+        public PageToolTips PageToolTips()
+        {
+            return new(DriverManager);
+        }
+
+        public PageDroppable PageDroppable()
+        {
+            return new(DriverManager);
         }
     }
 }
