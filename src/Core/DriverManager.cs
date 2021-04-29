@@ -7,6 +7,9 @@ using OpenQA.Selenium.IE;
 
 namespace Core
 {
+    /// <summary>
+    /// Manages the driver and
+    /// </summary>
     public class DriverManager
     {
         private static int _impWaitTimeout;
