@@ -1,0 +1,133 @@
+﻿using Core;
+using OpenQA.Selenium;
+using Xunit;
+
+namespace DemoQa.Com_PageObjects.PageObjects
+{
+    
+    public class PageStudentRegistrationForm : BasePage
+    {
+        protected sealed override string PageUrl { get; set; }
+        
+        public PageStudentRegistrationForm(DriverManager driverManager) : base(driverManager)
+        {
+            PageUrl = "/automation-practice-form";
+        }
+
+        // [FindsBy(How = How.Id, Using = "firstName")]
+        // my preference is to just do this below instead of using the attributes above
+        // it's easier to write and doesn't require an additional library, I know
+        // some people prefer using the FindsBy attribute though
+        private IWebElement FirstName => Driver.FindElement(By.Id("firstName"));
+        private IWebElement LastName => Driver.FindElement(By.Id("lastName"));
+        private IWebElement Email => Driver.FindElement(By.Id("userEmail"));
+        private IWebElement MobileNumber => Driver.FindElement(By.Id("userNumber"));
+        private IWebElement ButtonSubmit => Driver.FindElement(By.Id("submit"));
+        private IWebElement Dob => Driver.FindElement(By.Id("dateOfBirthInput"));
+        private IWebElement CurrentAddress => Driver.FindElement(By.Id("currentAddress"));
+        private IWebElement ButtonUploadPicture => Driver.FindElement(By.Id("uploadPicture"));
+
+        public PageStudentRegistrationForm SendStudentName(string firstName, string lastName)
+        {
+            FirstName.SendKeys(firstName);
+            LastName.SendKeys(lastName);
+
+            return this;
+        }
+
+        public PageStudentRegistrationForm SendEmail(string emailAddress)
+        {
+            Email.SendKeys(emailAddress);
+            
+            return this;
+        }
+
+        public PageStudentRegistrationForm SelectGender(string gender)
+        {
+            // really? :/
+            
+            ExecuteJavaScript(Driver
+                .FindElement(By
+                    // tell the developer they've spelled gender wrong
+                    .XPath($"//div[@id='genterWrapper']//*[contains(text(),'{gender}')]/..//input")));
+
+            return this;
+        }
+
+        public PageStudentRegistrationForm SendPhoneNumber(string number)
+        {
+            MobileNumber.SendKeys(number);
+            
+            return this;
+        }
+
+        public PageStudentRegistrationForm SendDateOfBirth(string dob)
+        {
+            // this control has a deliberate bug in it you can't clear it
+            // and the delete key causes the whole page back to go back
+
+            Dob.Clear();
+            
+            Dob.SendKeys(dob);
+
+            return this;
+        }
+
+        public PageStudentRegistrationForm SelectHobby(string hobby)
+        {
+            ExecuteJavaScript(Driver
+                .FindElement(By
+                    .XPath($"//div[@id='hobbiesWrapper']//*[contains(text(),'{hobby}')]/..//input")));
+
+            return this;
+        }
+
+        public PageStudentRegistrationForm SendCurrentAddress(string address)
+        {
+            CurrentAddress.SendKeys(address);
+
+            return this;
+        }
+
+        public PageStudentRegistrationForm UploadPicture(string fileName)
+        {
+            ButtonUploadPicture.SendKeys(fileName);
+
+            return this;
+        }
+
+        public bool MandatoryFieldsAreMissing()
+        {
+            var firstName = Driver.FindElement(By.CssSelector("input#firstName:invalid"));
+            var lastName = Driver.FindElement(By.CssSelector("input#lastName:invalid"));
+            var mobileNumber = Driver.FindElement(By.CssSelector("input#userNumber:invalid"));
+
+            return firstName.Displayed && lastName.Displayed && mobileNumber.Displayed;
+        }
+
+        public bool RegistrationCompleteModalOpen()
+        {
+            // instead of checking the mandatory fields are set to invalid in the 
+            // css (above), just check the modal appeared or didn't appear - pros and cons
+            // they both kind of suck tbh :/
+
+            try
+            {
+                Driver.FindElement(By.Id("example-modal-sizes-title-lg"));
+
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+
+        public PageStudentRegistrationForm Submit()
+        {
+            ButtonSubmit.Click();
+
+            return this;
+        }
+    }
+}

@@ -24,6 +24,12 @@ namespace DemoQa.Com_PageObjects
             Driver.Navigate().GoToUrl(DriverManager.SutUrl + PageUrl);
         }
 
+        protected void ExecuteJavaScript(IWebElement element)
+        {
+            var jse = (IJavaScriptExecutor) Driver;
+            jse.ExecuteScript("arguments[0].click();", element);
+        }
+
         public bool IsPageLoaded()
         {
             throw new System.NotImplementedException();
