@@ -28,7 +28,7 @@ namespace DemoQa.Com_Tests.Tests
                     // into it - automating calendars like this is a waste of time
                     // control should allow you to enter the date as a string for automated tests
                     // I suspect the test has been deliberately setup so you can't just use
-                    // the javascript executor to change the date on the element in the DOM?
+                    // the javascript executor to change the date on the element in the DOM? (react maybe)
                     // it would take loads of code to achieve this using element clicks and it's
                     // not worth it, the date picker is just an inbuilt function of the whatever
                     // javascript library the front end has been written in, you don't need to 
