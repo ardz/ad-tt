@@ -7,7 +7,7 @@ ad-tt
 * Used xBheave for gherkin style in certain places (if needed)
 * run “dotnet test” in the e2e\DemoQa.Com_Tests\Tests directory from the command line
 
-# to be added if I’d spend more time (had to timebox it to no more than day unfortunately) 😊
-* test logging and output if needed (may not be)
+# what I've have added if I’d spend more time (had to timebox it to no more than day unfortunately) 😊
+* test logging and output (reports?) maybe
 
 questions/comments => richard@developerintest.dev
