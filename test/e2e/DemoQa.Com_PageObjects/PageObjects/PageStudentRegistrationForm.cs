@@ -65,8 +65,11 @@ namespace DemoQa.Com_PageObjects.PageObjects
             // Dob.Clear();
             // Dob.SendKeys(dob);
             
-            var jse = (IJavaScriptExecutor) Driver;
-            jse.ExecuteScript($"document.getElementById('dateOfBirthInput').value='{dob}'");
+            Dob.SendKeys(Keys.Control + "a");
+            Dob.SendKeys(dob);
+            
+            // var jse = (IJavaScriptExecutor) Driver;
+            // jse.ExecuteScript($"document.getElementById('dateOfBirthInput').value='{dob}'");
 
             return this;
         }
