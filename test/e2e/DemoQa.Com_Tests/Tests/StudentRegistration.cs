@@ -16,7 +16,7 @@ namespace DemoQa.Com_Tests.Tests
     {
         private readonly ITestOutputHelper _output;
         private readonly E2ETestFixture _fixture;
-        
+
         public RegistrationTests(E2ETestFixture fixture, ITestOutputHelper output)
         {
             _output = output;
@@ -24,23 +24,23 @@ namespace DemoQa.Com_Tests.Tests
         }
 
         [Scenario]
-        [InlineData("Jane", "Smith", "user@domain.com", "Female", "0123456789", "1 Oct 2001", "Sports",
+        [InlineData("Jane", "Smith", "user@domain.com", "Female", "0123456789", "16/October/1982", "Sports",
             "1 The Road, The Place, The Town, NE1 1DD", "profile.jpg")]
-        [InlineData("Jon", "Doe", "user@domain.com", "Male", "0123456789", "1 Oct 2001", "Reading",
+        [InlineData("Jon", "Doe", "user@domain.com", "Male", "0123456789", "16/October/1982", "Reading",
             "2 The Road, The Place, The Town, NE1 1DD", "profile.jpg")]
-        [InlineData("Sam", "Jones", "user@domain.com", "Other", "0123456789", "1 Oct 2001", "Music",
+        [InlineData("Sam", "Jones", "user@domain.com", "Other", "0123456789", "16/October/1982", "Music",
             "3 The Road, The Place, The Town, NE1 1DD", "profile.jpg")]
         public void StudentCanRegisterAndSubmit(string forename, string surname, string email, string gender,
             string phoneNumber, string dob, string hobby, string address, string profile)
         {
             _fixture.DemoQaPages.PageStudentRegistrationForm().NavigateTo();
-            
+
             // deliberately writing gherkin here which isn't tied to a UI (anti-patten)
             // the tests steps would then be hard coded to the UI which could change
             // the types of behaviours could be tested in a subcutaneous (underneath the UI)
             // manner too, beyond even an API to something like a system integration test which
             // calls a handler from the application code for example
-            
+
             // https://www.ministryoftesting.com/dojo/lessons/introduction-to-subcutaneous-testing
 
             // could be an example of a given here but there's not really any initial

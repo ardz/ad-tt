@@ -1,6 +1,7 @@
-﻿using Core;
+﻿using System.Linq;
+using Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.Support.UI;
 
 namespace DemoQa.Com_PageObjects
 {
@@ -24,11 +25,36 @@ namespace DemoQa.Com_PageObjects
         {
             Driver.Navigate().GoToUrl(DriverManager.SutUrl + PageUrl);
         }
+        
+        // move into a helper class if there's more of these types of things going on
+        // doesn't really belong on this class
+        public static string[] DateSplitter(string date, string separator)
+        {
+            return date.Split(separator);
+        }
+        
+        public void CalendarDatePicker(string day, string month, string year)
+        {
+            var monthSelect = new SelectElement(Driver
+                .FindElement(By.ClassName("react-datepicker__month-select")));
+
+            monthSelect.SelectByText(month);
+
+            var yearSelect = new SelectElement(Driver.FindElement(By.ClassName("react-datepicker__year-select")));
+
+            yearSelect.SelectByText(year);
+
+            var allDays = Driver.FindElements(
+                By.XPath($"//div[contains(@aria-label, '{month}')]"));
+
+            allDays.First(x => x.Text == day).Click();
+        }
 
         protected void ExecuteJavaScriptClick(IWebElement element)
         {
             var jse = (IJavaScriptExecutor) Driver;
             jse.ExecuteScript("arguments[0].click();", element);
         }
+
     }
 }

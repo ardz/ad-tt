@@ -1,5 +1,9 @@
-﻿using Core;
+﻿using System;
+using System.Globalization;
+using System.Linq;
+using Core;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace DemoQa.Com_PageObjects.PageObjects
 {
@@ -60,19 +64,24 @@ namespace DemoQa.Com_PageObjects.PageObjects
 
         public PageStudentRegistrationForm SendDateOfBirth(string dob)
         {
+            Dob.Click();
+
+            var dayMonthYear = dob.Split("/");
+
+            CalendarDatePicker(dayMonthYear[0], dayMonthYear[1], dayMonthYear[2]);
+            
             // this control has a deliberate bug in it you can't clear it properly
             // and the delete key causes the whole page back to go back
             // Dob.Clear();
             // Dob.SendKeys(dob);
-            
-            Dob.SendKeys(Keys.Control + "a");
-            Dob.SendKeys(dob);
             
             // var jse = (IJavaScriptExecutor) Driver;
             // jse.ExecuteScript($"document.getElementById('dateOfBirthInput').value='{dob}'");
 
             return this;
         }
+
+
 
         public PageStudentRegistrationForm SelectHobby(string hobby)
         {

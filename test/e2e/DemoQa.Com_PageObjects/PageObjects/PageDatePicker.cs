@@ -13,11 +13,15 @@ namespace DemoQa.Com_PageObjects.PageObjects
         }
 
         private IWebElement DatePicker => Driver.FindElement(By.Id("datePickerMonthYearInput"));
-
+        
         public PageDatePicker SetCalendarDate(string date)
         {
-            var jse = (IJavaScriptExecutor) Driver;
-            jse.ExecuteScript($"document.getElementById('datePickerMonthYearInput').value='{date}'");
+            DatePicker.Click();
+
+            // naughty really, changing the data here but this is what happens with these calendar controls :shrug:
+            var dayMonthYear = DateSplitter(date, "/");
+            
+            CalendarDatePicker(dayMonthYear[0], dayMonthYear[1], dayMonthYear[2]);
 
             return this;
         }
