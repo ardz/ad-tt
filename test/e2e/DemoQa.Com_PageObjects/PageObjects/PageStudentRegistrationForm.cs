@@ -1,9 +1,6 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using Core;
+﻿using Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
 
 namespace DemoQa.Com_PageObjects.PageObjects
 {
@@ -137,6 +134,7 @@ namespace DemoQa.Com_PageObjects.PageObjects
 
         public PageStudentRegistrationForm Submit()
         {
+            ScrollIntoView(ButtonSubmit);
             ButtonSubmit.Click();
 
             return this;

@@ -12,6 +12,7 @@ namespace DemoQa.Com_PageObjects
     public abstract class BasePage
     {
         protected readonly IWebDriver Driver;
+        private IJavaScriptExecutor JavaScriptExecutor;
         private DriverManager DriverManager { get; set; }
         protected abstract string PageUrl { get; set; }
 
@@ -19,6 +20,7 @@ namespace DemoQa.Com_PageObjects
         {
             DriverManager = driverManager;
             Driver = driverManager.Driver;
+            JavaScriptExecutor = (IJavaScriptExecutor) Driver;
         }
 
         public void NavigateTo()
@@ -52,9 +54,12 @@ namespace DemoQa.Com_PageObjects
 
         protected void ExecuteJavaScriptClick(IWebElement element)
         {
-            var jse = (IJavaScriptExecutor) Driver;
-            jse.ExecuteScript("arguments[0].click();", element);
+            JavaScriptExecutor.ExecuteScript("arguments[0].click();", element);
         }
 
+        protected void ScrollIntoView(IWebElement element)
+        {
+            JavaScriptExecutor.ExecuteScript("arguments[0].scrollIntoView(true);", element);
+        }
     }
 }
